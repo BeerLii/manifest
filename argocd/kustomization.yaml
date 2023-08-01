@@ -10,6 +10,8 @@ resources:
 - ./base/redis
 - ./base/server
 - ./base/dex
+- ./custom
+
 images:
 - name: quay.io/argoproj/argocd
   newName: quay.io/argoproj/argocd
