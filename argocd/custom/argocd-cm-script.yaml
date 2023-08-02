@@ -13,7 +13,7 @@ data:
       kustomize build ${ARGOCD_ENV_BASEPATH} > staging-manifest.yaml
     fi
 
-    [[ -d "vault-secret"]] && find vault-secret -type f -name "*.yaml" | xargs -I {} sh -c "printf '\n---\n'; cat {};" > vault-secrets.yaml
+    [[ -d "vault-secret" ]] && find vault-secret -type f -name "*.yaml" | xargs -I {} sh -c "printf '\n---\n'; cat {};" > vault-secrets.yaml
 
     if [[ -s "vault-secrets.yaml" ]];then
       yq 'select(.metadata.annotations."avp.kubernetes.io/path"?==("k8s-kv/platform/*"))' vault-secrets.yaml > platform-secrets.yaml
