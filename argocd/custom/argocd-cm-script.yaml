@@ -20,9 +20,9 @@ data:
       yq 'select(.metadata.annotations."avp.kubernetes.io/path"?==("k8s-kv/platform/*"))' vault-secrets.yaml > platform-secrets.yaml
       yq 'select(.metadata.annotations."avp.kubernetes.io/path"?==("k8s-kv/app/*"))' vault-secrets.yaml > app-secrets.yaml
     fi
-
-    if [[ -s "platform-secrets.yaml" ]] && printf '\n---\n' >> staging-manifest.yaml && argocd-vault-plugin generate platform-secrets.yaml -s vault-platform-cred >> staging-manifest.yaml
-    if [[ -s "app-secrets.yaml" ]] && printf '\n---\n' >> staging-manifest.yaml && argocd-vault-plugin generate app-secrets.yaml -s vault-app-cred >> staging-manifest.yaml
-    echo "\n" >> /tmp/test.txt
+    echo "bbb\n" >> /tmp/test.txt
+    [[ -s "platform-secrets.yaml" ]] && printf '\n---\n' >> staging-manifest.yaml && argocd-vault-plugin generate platform-secrets.yaml -s vault-platform-cred >> staging-manifest.yaml
+    [[ -s "app-secrets.yaml" ]] && printf '\n---\n' >> staging-manifest.yaml && argocd-vault-plugin generate app-secrets.yaml -s vault-app-cred >> staging-manifest.yaml
+    echo "aaa\n" >> /tmp/test.txt
     mv staging-manifest.yaml manifest.yaml
     ls >> /tmp/test.txt
