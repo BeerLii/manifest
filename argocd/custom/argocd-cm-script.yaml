@@ -28,5 +28,4 @@ data:
     [[ -s "app-secrets.yaml" ]] && printf '\n---\n' >> staging-manifest.yaml && argocd-vault-plugin generate app-secrets.yaml -s vault-app-cred >> staging-manifest.yaml
     echo "---" >> /tmp/test.txt
     cat staging-manifest.yaml >> /tmp/test.txt 
-    echo "task done ----- beer"
     mv staging-manifest.yaml manifest.yaml
