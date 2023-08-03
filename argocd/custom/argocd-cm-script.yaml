@@ -16,8 +16,8 @@ data:
     [[ -d "vault-secret" ]] && find vault-secret -type f -name "*.yaml" | xargs -I {} sh -c "printf '\n---\n'; cat {};" > vault-secrets.yaml
 
     if [[ -s "vault-secrets.yaml" ]];then
-      yq 'select(.metadata.annotations."avp.kubernetes.io/path"?==("k8s-kv/platform/*"))' vault-secrets.yaml > platform-secrets.yaml
-      yq 'select(.metadata.annotations."avp.kubernetes.io/path"?==("k8s-kv/app/*"))' vault-secrets.yaml > app-secrets.yaml
+      yq 'select(.metadata.annotations."avp.kubernetes.io/path"?==("k8s-kv/data/platform/*"))' vault-secrets.yaml > platform-secrets.yaml
+      yq 'select(.metadata.annotations."avp.kubernetes.io/path"?==("k8s-kv/data/app/*"))' vault-secrets.yaml > app-secrets.yaml
     fi
     echo "--- platform-secrets ---" > /tmp/test.txt
     cat platform-secrets.yaml >> /tmp/test.txt
