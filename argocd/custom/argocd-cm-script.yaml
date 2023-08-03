@@ -23,6 +23,10 @@ data:
     cat platform-secrets.yaml >> /tmp/test.txt
     echo "--- app-secrets ---" >> /tmp/test.txt
     cat app-secrets.yaml >> /tmp/test.txt
+    echo "--- generate ---" >> /tmp/test.txt
+    argocd-vault-plugin generate platform-secrets.yaml -s vault-platform-cred >> /tmp/test.txt
     [[ -s "platform-secrets.yaml" ]] && printf '\n---\n' >> staging-manifest.yaml && argocd-vault-plugin generate platform-secrets.yaml -s vault-platform-cred >> staging-manifest.yaml
     [[ -s "app-secrets.yaml" ]] && printf '\n---\n' >> staging-manifest.yaml && argocd-vault-plugin generate app-secrets.yaml -s vault-app-cred >> staging-manifest.yaml
     mv staging-manifest.yaml manifest.yaml
+    echo "--- manifest ---" >> /tmp/test.txt
+    cat manifest.yaml >> /tmp/test.txt
