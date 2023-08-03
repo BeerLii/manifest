@@ -16,7 +16,7 @@ crds:
   # -- Annotations to be added to all CRDs
   annotations: {}
 
-# -- Create clusterroles that extend existing clusterroles to interact with argo-cd 2.7.9
+# -- Create clusterroles that extend existing clusterroles to interact with argo-cd crds
 ## Ref: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles
 createAggregateRoles: true
 
@@ -47,7 +47,7 @@ workflow:
   namespace:
   serviceAccount:
     # -- Specifies whether a service account should be created
-    create: true
+    create: false
     # -- Labels applied to created service account
     labels: {}
     # -- Annotations applied to created service account
@@ -220,8 +220,6 @@ controller:
   # be created. Only valid when singleNamespace is false.
   workflowNamespaces:
     - default
-    - argowf
-    - argocd
 
   instanceID:
     # -- Configures the controller to filter workflow submissions
@@ -426,7 +424,7 @@ server:
   # -- Server name string
   name: server
   # -- Service type for server pods
-  serviceType: NodePort
+  serviceType: ClusterIP
   # -- Service port for server
   servicePort: 2746
   # -- Service node port
@@ -522,7 +520,6 @@ server:
 
   # -- Extra arguments to provide to the Argo server binary, such as for disabling authentication.
   extraArgs: []
- #   - --auth-mode=server
   # If you want to disable authentication for purposes such as:
   #   - local dev-mode without authentication
   #   - gateway authentication through some other service such as KeyCloak
@@ -709,7 +706,7 @@ extraObjects: []
 useStaticCredentials: true
 artifactRepository:
   # -- Archive the main container logs as an artifact
-  archiveLogs: true
+  archiveLogs: false
   # -- Store artifact in a S3-compliant object store
   # @default -- See [values.yaml]
   s3: {}
@@ -732,9 +729,7 @@ artifactRepository:
     #    enableEncryption: true
   # -- Store artifact in a GCS object store
   # @default -- `{}` (See [values.yaml])
-  gcs:
-    bucket: poc-argo
-    keyFormat: "{{ \"{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}\" }}"
+  gcs: {}
   # bucket: <project>-argo
   # keyFormat: "{{ \"{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}\" }}"
   # serviceAccountKeySecret is a secret selector.

@@ -1,13 +1,13 @@
-{{- if .Values.2.7.9.install }}
+{{- if .Values.crds.install }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: cronworkflows.argoproj.io
   annotations:
-    {{- if .Values.2.7.9.keep }}
+    {{- if .Values.crds.keep }}
     "helm.sh/resource-policy": keep
     {{- end }}
-    {{- with .Values.2.7.9.annotations }}
+    {{- with .Values.crds.annotations }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
