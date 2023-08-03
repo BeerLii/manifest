@@ -5,14 +5,13 @@ metadata:
 data:
   argocd-cmp.sh: |
     #!/usr/bin/env bash
-    pwd > /tmp/test.txt
-    echo "----" >> /tmp/test.txt
     if [[ "$1" == "helm" ]];then
       helm template ${ARGOCD_ENV_BASEPATH} --name-template ${ARGOCD_APP_NAME} --namespace ${ARGOCD_APP_NAMESPACE} \
         --values ${ARGOCD_ENV_VALUEFILES} > staging-manifest.yaml
     elif [ "$1" == "kustomize" ]; then
       kustomize build ${ARGOCD_ENV_BASEPATH} > staging-manifest.yaml
     fi
- 
+    pwd > /tmp/test.txt
+    echo "----" >> /tmp/test.txt 
     mv staging-manifest.yaml manifest.yaml
     echo "task done ----- beer"
