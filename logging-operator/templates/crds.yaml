@@ -1,0 +1,6 @@
+{{- if .Values.createCustomResource -}}
+{{- range $path, $bytes := .Files.Glob "2.7.9/*.yaml" }}
+{{ $.Files.Get $path }}
+---
+{{- end }}
+{{- end }}
