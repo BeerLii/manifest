@@ -5,3 +5,4 @@ resources:
   - argo-workflow
   - argocd
   - eck
+  - kube-logging
