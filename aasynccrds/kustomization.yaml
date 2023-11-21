@@ -6,3 +6,4 @@ resources:
   - argocd
   - eck
   - kube-logging
+  - fluent-operator
