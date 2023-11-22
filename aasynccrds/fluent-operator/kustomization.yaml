@@ -22,7 +22,3 @@ resources:
   - fluentd.fluent.io_fluentds.yaml
   - fluentd.fluent.io_inputs.yaml
   - fluentd.fluent.io_outputs.yaml
-fluentd:
-  fluent:
-    io_clusterinputs:
-      yaml:
